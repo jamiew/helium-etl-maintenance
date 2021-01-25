@@ -1,5 +1,5 @@
 echo; echo "blockchain-etl:"
-$HOME/blockchain-etl/blockchain_etl info height
+$HOME/blockchain-etl/blockchain_etl info height | awk '{ print $2 }'
 
 echo; echo "etl database:"
 echo "select max(block) as height from transactions limit 1;" | /usr/bin/psql etl -P expanded=no

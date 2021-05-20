@@ -1,4 +1,7 @@
 #!/bin/sh
-cd /root/blockchain-etl # for cronjob
+
+source "$(dirname $0)/etl-env.sh"
+cd $ETL_DIRECTORY # for cronjob-compatibility
+
 make stop
 make start

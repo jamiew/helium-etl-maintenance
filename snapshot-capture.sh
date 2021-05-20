@@ -1,15 +1,23 @@
 #!/bin/bash
+set -e
 
-etl="/root/blockchain-etl/_build/dev/rel/blockchain_etl/bin/blockchain_etl"
-echo "etl => $etl"
+source "$(dirname $0)/etl-env.sh"
+etl="$ETL_DIRECTORY/_build/dev/rel/blockchain_etl/bin/blockchain_etl"
+echo "etl=$etl"
 
-outdir="/root/snapshots"
+outdir="$SNAPSHOTS_DIR"
 mkdir -p "$outdir"
+
+height=$($etl info height | awk '{ print $2 }')
+outfile="$outdir/snapshot-$height.bin"
+
+if [ -e "$outfile" ]; then
+  echo "$0: error, outfile $outfile already exists. aborting"
+  exit 1
+fi
 
 echo "Pausing sync..."
 $etl repair sync_pause
-height=$($etl info height | awk '{ print $2 }')
-outfile="$outdir/snapshot-$height.bin"
 echo "Taking snapshot => $outfile ..."
 $etl snapshot take "$outfile"
 echo "Resuming sync..."

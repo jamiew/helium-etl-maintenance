@@ -1,7 +1,9 @@
 #!/bin/sh
 set -e
 
-cd /root/blockchain-etl # for cronjob
+source "$(dirname $0)/etl-env.sh"
+cd $ETL_DIRECTORY # for cronjob-compatibility
+
 latest=$(cat LATEST_BUILD)
 echo "LATEST_BUILD: $latest"
 echo "Existing HEAD: $(git rev-parse HEAD)"

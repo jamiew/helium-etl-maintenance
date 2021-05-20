@@ -1,0 +1,6 @@
+export PGHOST="localhost"
+export PGUSER="etl"
+export PGPASSWORD="topsecret"
+export ETL_DIRECTORY="/root/blockchain-etl"
+export ETL_QUERIES="/root/etl-queries"
+export SNAPSHOTS_DIR="/root/ledger-snapshots"

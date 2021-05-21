@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 which=$1
 psql="/usr/bin/psql"
@@ -9,4 +9,5 @@ if [ -z $which ]; then
 fi
 
 source "$(dirname $0)/etl-env.sh"
-$psql etl < $ETL_QUERIES/crontab-$which.sql
+cd $ETL_QUERIES
+$psql etl < crontab-$which.sql

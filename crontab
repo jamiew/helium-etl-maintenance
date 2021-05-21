@@ -1,5 +1,6 @@
 # m h dom mon dow    command
-0 1 * * *      time /root/etl-update-and-restart.sh
-0 2 * * *      time /root/snapshot-capture.sh
-0 3 * * *      time /root/etl-refresh-views.sh
+5 1 * * *      time /root/etl-update-and-restart.sh
+5 2 * * *      time /root/snapshot-capture.sh
+5 3 * * *      time /root/etl-crontab-run.sh daily
+0 * * * *      time /root/etl-crontab-run.sh hourly
 

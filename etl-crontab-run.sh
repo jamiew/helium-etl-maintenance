@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 which=$1
 psql="/usr/bin/psql"
@@ -10,4 +11,4 @@ fi
 
 source "$(dirname $0)/etl-env.sh"
 cd $ETL_QUERIES
-$psql etl < crontab-$which.sql
+$psql $PGDATABASE < $ETL_QUERIES/crontab-$which.sql
